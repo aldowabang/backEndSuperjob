@@ -1,0 +1,62 @@
+#core dependencies
+fastapi
+Uvicorn
+
+#database
+psycopg2-binary
+
+# ORM
+SQLAlchemy
+
+#migrations
+alembic
+
+#data validation
+pydantic
+
+#authentication
+python-jose
+passlib[bcrypt]
+
+
+# superjob-api/
+# ├── app/
+# │   ├── main.py              # Inisialisasi FastAPI & menyatukan semua router
+# │   ├── database.py          # SessionLocal, Base Model, & get_db dependency
+# │   ├── core/
+# │   │   ├── config.py        # Pengaturan Pydantic Settings (mengambil dari .env)
+# │   │   └── security.py      # JWT, Password Hashing, OAuth2 scheme
+# │   ├── models/              # Tempat mendefinisikan tabel SQLAlchemy
+# │   │   ├── __init__.py      # Memudahkan import Base dari semua model
+# │   │   ├── user.py          # User & Profile
+# │   │   ├── company.py       # Company model
+# │   │   ├── job.py           # Job, Skill, JobSkill (Pivot)
+# │   │   ├── application.py   # Application & ApplicationHistory
+# │   │   └── master.py        # City, JobType, WorkModel
+# │   ├── schemas/             # Pydantic models (Validasi Data)
+# │   │   ├── auth_schema.py
+# │   │   ├── user_schema.py
+# │   │   ├── job_schema.py
+# │   │   ├── application_schema.py
+# │   │   └── master_schema.py # Schema untuk City/Skill
+# │   ├── crud/                # Logika Query (Create, Read, Update, Delete)
+# │   │   ├── __init__.py
+# │   │   ├── user_crud.py
+# │   │   ├── job_crud.py
+# │   │   └── app_crud.py      # Logika untuk Application & History
+# │   └── api/
+# │       └── v1/
+# │           ├── api.py       # Menggabungkan semua router di endpoints/
+# │           └── endpoints/
+# │               ├── auth.py
+# │               ├── users.py
+# │               ├── jobs.py
+# │               ├── applications.py
+# │               └── master.py    # Endpoint untuk ambil data City/Skills
+# ├── alembic/                 # File migrasi database
+# ├── tests/                   # Folder untuk Pytest
+# ├── .env                     # File rahasia (DATABASE_URL, SECRET_KEY)
+# ├── .env.example             # Contoh isi .env tanpa data sensitif
+# ├── .gitignore               
+# ├── requirements.txt         
+# └── README.md
