@@ -39,3 +39,22 @@ class UserResponse(UserBase):
 
     class Config:
         from_attributes = True # Mengizinkan Pydantic membaca data dari objek SQLAlchemy
+
+# Shema untuk create company (relasi one-to-one dengan User)
+class CompanyCreate(BaseModel):
+    name: str
+    description: Optional[str] = None
+    city_id: int
+    logo_url: Optional[str] = None
+
+# Schema untuk Response Company
+class CompanyResponse(BaseModel):
+    id: int
+    user_id: int
+    name: str
+    description: Optional[str] = None
+    city_id: Optional[int] = None
+    logo_url: Optional[str] = None
+
+    class Config:
+        from_attributes = True

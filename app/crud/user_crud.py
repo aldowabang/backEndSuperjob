@@ -1,7 +1,8 @@
 from sqlalchemy.orm import Session
 from app.models.user import User, Profile
-from app.schemas.user_schema import UserCreate
+from app.schemas.user_schema import UserCreate, CompanyCreate
 from app.core.security import get_password_hash
+from app.models.company import Company
 
 def get_user_by_email(db: Session, email: str):
     """Mengecek apakah email sudah terdaftar"""
@@ -33,3 +34,13 @@ def create_user(db: Session, user: UserCreate):
     db.commit()
     
     return db_user
+
+def create_company(db: Session, company_in: CompanyCreate, user_id: int):
+    db_company = Company(
+        **company_in.dict(),
+        user_id=user_id
+    )
+    db.add(db_company)
+    db.commit()
+    db.refresh(db_company)
+    return db_company
